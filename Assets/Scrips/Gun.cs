@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     [Tooltip("연사속도")]
     public float fireRate;
     [Tooltip("재장전 속도")]
-    public float relodeBulletCount;
+    public float reloadCount;
 
 
     [Tooltip("총의 데미지")]
@@ -21,7 +21,7 @@ public class Gun : MonoBehaviour
 
     [Tooltip("총알 재장전 갯수")]
     public int reloadBulletCount;
-    [Tooltip("현제 탄알집에 남았는 총알의 갯수")]
+    [Tooltip("현재 탄알집에 남았는 총알의 갯수")]
     public int currentBulletCount;
     [Tooltip("최대 소유 가능 총알 갯수")]
     public int maxBulletCount;

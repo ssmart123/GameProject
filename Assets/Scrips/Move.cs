@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float MoveSpeed;
-    public float RunSpeed;
+    public float MoveSpeed = 5;
+    public float RunSpeed = 10;
     private float applySpeed;
 
-    public float JumpForce;
+    private Animator ani;
+
+    public float JumpForce = 10;
+
+    public bool isRun;
 
     private bool isGround = true;
 
@@ -36,10 +40,13 @@ public class Move : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            isRun = true;
             applySpeed = RunSpeed;
+
         }
         else 
         {
+            isRun = false;
             applySpeed = MoveSpeed;
         }
     }
