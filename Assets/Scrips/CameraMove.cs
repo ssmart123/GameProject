@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     [Tooltip("카메라 제한")]
-    public float CameraLimitMax, CameraLimitMin;
+    public float CameraLimitMax = 45f, CameraLimitMin = -30f;
     [SerializeField]
     [Tooltip("수직감도")]
     private float horSensitivity =10f;
@@ -13,15 +13,12 @@ public class CameraMove : MonoBehaviour
     public float verSensitivity= 10f; 
     
 
-    private float currentCameraRotX, currentCameraRotY;
+    private float currentCameraRotX = 0, currentCameraRotY = 0;
 
     
     public Camera Camera;
 
 
-    void Start()
-    {
-    }
 
     
     void Update()
