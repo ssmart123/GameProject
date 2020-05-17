@@ -8,9 +8,9 @@ public class CameraMove : MonoBehaviour
     public float CameraLimitMax, CameraLimitMin;
     [SerializeField]
     [Tooltip("수직감도")]
-    private float horSensitivity;
+    private float horSensitivity =10f;
     [Tooltip("수평감도")]
-    public float verSensitivity; 
+    public float verSensitivity= 10f; 
     
 
     private float currentCameraRotX, currentCameraRotY;

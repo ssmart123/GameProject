@@ -17,7 +17,7 @@ public class GunController : MonoBehaviour
     void Update()
     {
         GunFireRateCalc();
-        TryRebound();
+       
         TryReload();
         TryFire();
 
@@ -29,13 +29,7 @@ public class GunController : MonoBehaviour
             currentFireRate -= Time.deltaTime;
     }
 
-    private void TryRebound()
-    {
-        if (Input.GetButtonDown("Fire2"))
-        {
-            Debug.Log("견착");
-        }
-    }
+   
         
     private void TryFire()
     {
@@ -68,12 +62,16 @@ public class GunController : MonoBehaviour
             {
                 currentGun.currentBulletCount += currentGun.carryBulletCount;
                 currentGun.carryBulletCount = 0;
-                Debug.Log("남은 총알 없음");
                 return;
             }
             currentGun.carryBulletCount -= RE;
             currentGun.currentBulletCount = currentGun.currentBulletCount + RE;
             Debug.Log("재장전");
+        }
+        else 
+        {
+            Debug.Log("남은 총알 없음");
+            return;
         }
     }
    

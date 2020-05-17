@@ -1,0 +1,75 @@
+public class CameraControl : Monobehaviour
+{
+	[Header("카메라 기본속성")]
+	private Transform myTransform = null;
+	// 캐릭터 타겟
+	public GameObject Target = null;
+	// 
+	private Transform targetTransform = null;
+
+	public enum CameraViewPointState { FIRST, SECOND, THIRD }
+	public CameraViewPointState CameraState = CameraViewPointState.THIRD;
+
+	[Header("3인칭 카메라")]
+	public float Distance = 5f; // 타겟으로부터 떨어진 거리.
+	public float Height = 1.5f // 타겟의 위치보다 더 추가적인 높이.
+	public float HeightDamping = 2f
+	public float RotationDamping = 3f;
+
+      void Start()
+      {
+	myTransform = GetCompornent<Transform>();
+	if(Target != null)
+	{
+	       targetTransform =Target.transform;
+	}
+      }	
+	/// 3인칭 카메라.      
+      void ThirdView()
+      {
+	float wantedRotationAngle = targetTransform.eulerAngle.y; // 현제 타겟의 y 축의 각도 값.
+	float wantedHeight = targetTransform.position.y + Height; // 현재 타겟의 높이 우리가 추가로높이고 싶은 높이
+	
+	float currentRotationAngle = myTransform.eulerAngles.y;  // 현재 카메라의 y축의 각도 값.
+	float currentHeight = myTransform.position.y; // 현재 카메라의 높이 값.
+
+	// 현재 각도에서 원하는 각도로 댐핑 값을 얻게 됩니다.
+	currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, RotationDamping*Time.deltaTime)
+	// 현재 높이에서 원하는 높이로 댐핑값을 얻습니다.
+	currentHeight = Mathf.Lerp(currentHeight, wantHeight, HeigheDamping * Time.deltaTime);
+	
+	Quaternion currentRotation = Quternion.Euler(0f, currentRotationAngle, 0f);
+	
+	myTransform.position = targetTramsform.position;
+	myTransform.Position -= currentRotation* Vector3.forward * Distance;
+	myTransform.position = new Vector3(myTransform.position.x, currentheight, myTransform.position.z);
+
+	myTransform.LookAt(targetTransform);
+
+      }
+
+
+
+       /// update함수 후에 호출되는 업데이트.
+      private void LateUpdate()
+      {
+      	if(Target ==  null)
+	{
+	    return;
+	}
+	if(targetTransform == null)
+	{
+	    targetTransform = Target.transform;
+	}
+	switch(CameraState)
+	{
+	    case CameraViewPointState.THIRD:
+		ThirdView();
+		break;
+	    case CameraViewPointState.SECOND:
+		break;
+	    case CameraViewPointState.FIRST:
+		break;
+	}
+      }
+}
