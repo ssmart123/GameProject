@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CamereMoving;
 
 public class Move : MonoBehaviour
 {
+    CamMoveing CamMoveing;
     public float MoveSpeed = 5;
     public float RunSpeed = 10;
     private float applySpeed;
@@ -12,13 +14,17 @@ public class Move : MonoBehaviour
 
     public float JumpForce = 10;
 
-    public bool isRun;
+    private bool isRun=false;
 
     private bool isGround = true;
+
+    public Animator anim;
 
     private CapsuleCollider capsuleCollider;
     private Rigidbody Myrigid;
 
+
+    public float Xq;
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -32,6 +38,8 @@ public class Move : MonoBehaviour
         IsGround();
         Jump();
         Moving();
+
+        RotPlayer();
     }
 
 
@@ -62,11 +70,15 @@ public class Move : MonoBehaviour
             Myrigid.velocity = transform.up * JumpForce;
         }
     }
+
+
     private void Moving()
     {
         if (Input.GetKey(KeyCode.W))
         {
+            isRun = true;
             transform.Translate((Vector3.forward).normalized * applySpeed * Time.deltaTime);
+            anim.SetBool("Run",true);
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -80,5 +92,13 @@ public class Move : MonoBehaviour
         {
             transform.Translate((Vector3.right).normalized * applySpeed * Time.deltaTime);
         }
+    }
+
+    private void RotPlayer()
+    {
+        float x = Input.GetAxisRaw("Mouse X");
+        Xq += x * 10;
+
+        transform.rotation = Quaternion.Euler(0, Xq, 0);
     }
 }
