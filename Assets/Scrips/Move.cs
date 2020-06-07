@@ -10,11 +10,11 @@ public class Move : MonoBehaviour
     public float RunSpeed = 10;
     private float applySpeed;
 
-    private Animator ani;
+    private bool isRun = false;
 
     public float JumpForce = 10;
 
-    private bool isRun=false;
+    
 
     private bool isGround = true;
 
@@ -24,7 +24,7 @@ public class Move : MonoBehaviour
     private Rigidbody Myrigid;
 
 
-    public float Xq;
+    private float Xq;
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -76,9 +76,9 @@ public class Move : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            isRun = true;
+            
             transform.Translate((Vector3.forward).normalized * applySpeed * Time.deltaTime);
-            anim.SetBool("Run",true);
+           
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -96,9 +96,11 @@ public class Move : MonoBehaviour
 
     private void RotPlayer()
     {
-        float x = Input.GetAxisRaw("Mouse X");
-        Xq += x * 10;
+        
+            float x = Input.GetAxisRaw("Mouse X");
+            Xq += x * 10;
 
-        transform.rotation = Quaternion.Euler(0, Xq, 0);
+            transform.rotation = Quaternion.Euler(0, Xq, 0);
+        
     }
 }

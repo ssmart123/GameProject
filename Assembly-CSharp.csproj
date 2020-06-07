@@ -66,7 +66,6 @@
     <Compile Include="Assets\Scrips\CamMoveing.cs" />
     <Compile Include="Assets\Scrips\Gun.cs" />
     <Compile Include="Assets\Scrips\GunController.cs" />
-    <Compile Include="Assets\Scrips\GunController1.cs" />
     <Compile Include="Assets\Scrips\Move.cs" />
     <Compile Include="Assets\Scrips\Sword.cs" />
     <Compile Include="Assets\Scrips\SwordController.cs" />
